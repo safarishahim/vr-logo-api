@@ -14,4 +14,10 @@ export class UserFactory {
       updateDateTime: user.updateDateTime,
     };
   }
+
+  prepareUserIdInfo(user: User): Pick<User, 'id'> {
+    return {
+      id: user.id,
+    };
+  }
 }

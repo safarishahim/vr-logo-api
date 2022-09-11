@@ -1,5 +1,13 @@
-import { BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { UserStatus } from "./Enum/user-status.enum";
+import {
+  BeforeUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserStatus } from './Enum/user-status.enum';
+import { UserLogo } from '../UserLogo/userLogo.entity';
+import { UserFile } from '../UserFile/userFile.entity';
 
 @Entity()
 export class User {
@@ -7,24 +15,24 @@ export class User {
   id: number;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   firstName: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   lastName: string;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   email: string;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: UserStatus,
-    default: UserStatus.CREATED
+    default: UserStatus.CREATED,
   })
   status: string;
 
@@ -35,14 +43,14 @@ export class User {
   salt: string;
 
   @Column({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP"
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createDateTime: Date;
 
   @Column({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP"
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   updateDateTime: Date;
 
@@ -50,4 +58,10 @@ export class User {
   updateTimestamp() {
     this.updateDateTime = new Date();
   }
+
+  @OneToMany(() => UserLogo, (userLogo) => userLogo.user)
+  userLogos: UserLogo[];
+
+  @OneToMany(() => UserFile, (userFile) => userFile.user)
+  userFile: UserFile[];
 }

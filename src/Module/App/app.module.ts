@@ -3,6 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../Auth/auth.module';
 import { UserModule } from '../User/user.module';
+import { UserLogoModule } from '../UserLogo/userLogo.module';
+import { UserFileModule } from '../UserFile/userFile.module';
+import { GalleryModule } from '../Gallery/Gallery.module';
 
 @Module({
   imports: [
@@ -28,6 +31,9 @@ import { UserModule } from '../User/user.module';
     }),
     UserModule,
     AuthModule,
+    UserFileModule,
+    UserLogoModule,
+    GalleryModule,
   ],
   controllers: [],
   providers: [],

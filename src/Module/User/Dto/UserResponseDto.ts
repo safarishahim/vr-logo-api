@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { UserStatus } from "../Enum/user-status.enum";
+import { ApiProperty } from '@nestjs/swagger';
+import { UserStatus } from '../Enum/user-status.enum';
 
 export class UserResponseDto {
   @ApiProperty()
@@ -15,7 +15,7 @@ export class UserResponseDto {
   email: string;
 
   @ApiProperty({
-    enum: UserStatus
+    enum: UserStatus,
   })
   status: UserStatus;
 
