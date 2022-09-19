@@ -9,7 +9,6 @@ import {
   Post,
   Req,
   Res,
-  UnauthorizedException,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -29,7 +28,6 @@ import { AppApiResponse } from '../App/Dto/AppApiResponse';
 import { UserFileDto } from './Dto/UserFileDto';
 import { UserFileService } from './userFile.service';
 import { UserFile } from './userFile.entity';
-import { UserService } from '../User/user.service';
 import { Response } from 'express';
 
 @ApiTags('userFile')
@@ -39,10 +37,7 @@ import { Response } from 'express';
 })
 @ApiExtraModels(PaginatedDto, UserFileDto)
 export class UserFileController {
-  constructor(
-    private userFileService: UserFileService,
-    private userService: UserService,
-  ) {}
+  constructor(private userFileService: UserFileService) {}
 
   @Version('1')
   @UseGuards(JwtAuthGuard)
@@ -67,20 +62,12 @@ export class UserFileController {
     @Res() res: Response,
     @Req() req,
   ) {
-    const user = await this.userService.getById(req.userId);
-    if (!user) {
-      throw new UnauthorizedException({
-        error: 'UNAUTHORIZED',
-        statusCode: HttpStatus.UNAUTHORIZED,
-      });
-    }
-
     const userFileModel = new UserFile();
     userFileModel.fileName = file.originalname;
     userFileModel.fileSize = file.size;
     userFileModel.path = file.path;
     userFileModel.fileType = file.mimetype;
-    userFileModel.user = user;
+    userFileModel.user = req.user;
 
     const result = await this.userFileService.create(userFileModel);
     if (result.raw.affectedRows === 0) {
@@ -95,7 +82,7 @@ export class UserFileController {
         ...userFileModel,
         path: userFileModel.path.replace(`files\\`, ''),
         user: {
-          id: user.id,
+          id: req.user.id,
         },
       },
     });

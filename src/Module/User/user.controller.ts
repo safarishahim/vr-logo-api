@@ -58,16 +58,8 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get('current')
   async getCurrent(@Res() res: Response, @Req() req) {
-    const user = await this.userService.getById(req.userId);
-    if (!user) {
-      throw new NotFoundException({
-        error: 'USER_NOT_FOUND',
-        statusCode: HttpStatus.NOT_FOUND,
-      });
-    }
-
     return res.status(HttpStatus.OK).send({
-      data: this.userFactory.prepareUserInfo(user),
+      data: this.userFactory.prepareUserInfo(req.user),
     });
   }
 

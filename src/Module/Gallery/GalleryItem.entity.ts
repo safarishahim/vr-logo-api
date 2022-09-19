@@ -5,6 +5,8 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  TreeChildren,
+  TreeParent,
 } from 'typeorm';
 import { Gallery } from './Gallery.entity';
 import { UserFile } from '../UserFile/userFile.entity';
@@ -37,4 +39,10 @@ export class GalleryItem {
   @ManyToOne(() => UserFile)
   @JoinColumn()
   userFile: UserFile;
+
+  @TreeChildren()
+  children: GalleryItem[];
+
+  @TreeParent()
+  parent: GalleryItem;
 }
