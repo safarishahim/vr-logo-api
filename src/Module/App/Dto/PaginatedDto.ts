@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Column, SortBy } from "nestjs-paginate/lib/helper";
+import { ApiProperty } from '@nestjs/swagger';
+import { Column, SortBy } from 'nestjs-paginate/lib/helper';
 
 export class PaginatedDto<TDATA = any> {
   @ApiProperty()

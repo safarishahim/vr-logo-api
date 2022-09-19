@@ -1,13 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class PaginateQueryReq {
   @ApiProperty({
-    required: false
+    required: false,
   })
   page?: number;
 
   @ApiProperty({
-    required: false
+    required: false,
   })
   limit?: number;
 
@@ -17,22 +17,22 @@ export class PaginateQueryReq {
   sortBy?: string;
 
   @ApiProperty({
-    required: false
+    required: false,
   })
   searchBy?: string;
 
   @ApiProperty({
-    required: false
+    required: false,
   })
   search?: string;
 
   @ApiProperty({
-    required: false
+    required: false,
   })
   filter?: Record<string, any>;
 
   @ApiProperty({
-    required: false
+    required: false,
   })
   path: string;
 }

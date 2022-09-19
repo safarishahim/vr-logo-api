@@ -1,8 +1,8 @@
-import { applyDecorators, Type } from "@nestjs/common";
-import { ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
-import { PaginatedDto } from "./PaginatedDto";
+import { applyDecorators, Type } from '@nestjs/common';
+import { ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
+import { PaginatedDto } from './PaginatedDto';
 
-export const  AppApiPaginatedResponse = <TModel extends Type<any>>(
+export const AppApiPaginatedResponse = <TModel extends Type<any>>(
   model: TModel,
 ) => {
   return applyDecorators(
@@ -23,27 +23,27 @@ export const  AppApiPaginatedResponse = <TModel extends Type<any>>(
                 type: 'object',
                 properties: {
                   first: {
-                    type: 'string'
+                    type: 'string',
                   },
                   previous: {
-                    type: 'string'
+                    type: 'string',
                   },
                   current: {
-                    type: 'string'
+                    type: 'string',
                   },
                   next: {
-                    type: 'string'
+                    type: 'string',
                   },
                   last: {
-                    type: 'string'
+                    type: 'string',
                   },
-                }
+                },
               },
               statusCode: {
-                type: 'string'
+                type: 'string',
               },
               error: {
-                type: 'string'
+                type: 'string',
               },
             },
           },

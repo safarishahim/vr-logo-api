@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty } from "class-validator";
-import { Transform } from "class-transformer";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class AuthLoginRequestDto {
   @ApiProperty({
-    default: 'safarishahim@gmail.com'
+    default: 'safarishahim@gmail.com',
   })
   @IsNotEmpty()
   @IsEmail()
@@ -12,7 +12,7 @@ export class AuthLoginRequestDto {
   email: string;
 
   @ApiProperty({
-    default: '12345678'
+    default: '12345678',
   })
   @IsNotEmpty()
   password: string;
